@@ -73,14 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>D:\Codes\OpenGL_Learning\Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Codes\OpenGL_Learning\Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDIR)Thirdparty\glad\include\;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>D:\Codes\OpenGL_Learning\Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Codes\OpenGL_Learning\Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDIR)Thirdparty\glad\include\;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="Thirdparty\glad\src\glad.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
