@@ -141,8 +141,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ShaderReader.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Thirdparty\glad\src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\fragment.glsl" />
+    <None Include="Shaders\vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ShaderReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
