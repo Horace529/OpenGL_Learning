@@ -80,7 +80,7 @@
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>$(ProjectDIR)Thirdparty\glad\include\;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDIR)Thirdparty\glad\src;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,7 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ShaderReader.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="Thirdparty\glad\src\glad.c" />
   </ItemGroup>
@@ -150,7 +150,7 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShaderReader.h" />
+    <ClInclude Include="Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
