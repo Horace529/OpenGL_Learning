@@ -79,8 +79,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDIR)Thirdparty\glad\include\;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDIR)Thirdparty\glad\src;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Thirdparty\glad\include\;$(ProjectDir)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Thirdparty\glad\src;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(ProjectDir)Thirdparty\stb\;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,16 +142,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="CPP\Shader.cpp" />
+    <ClCompile Include="CPP\test.cpp" />
     <ClCompile Include="Thirdparty\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\fragment.glsl" />
-    <None Include="Shaders\vertex.glsl" />
+    <ClInclude Include="CPP\Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h" />
+    <None Include="Shaders\BrickWall_Fragment.glsl" />
+    <None Include="Shaders\BrickWall_vertex.glsl" />
+    <None Include="Shaders\fragment.glsl" />
+    <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

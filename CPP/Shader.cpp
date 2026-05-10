@@ -1,5 +1,5 @@
 #include "Shader.h"
-
+//to read and compile shaders from file
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
 	//retrieve the vertex/fragment source code from filePath
 	std::string vertexCode;
@@ -75,11 +75,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 }
-
+//to activate the shader
 void Shader::use() {
 	glUseProgram(ID);
 }
-
+//to modify the uniform variables in the shader
 void Shader::setBool(const std::string& name, bool value) const
 {
 	glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
@@ -100,3 +100,21 @@ void Shader::setVec4(const std::string& name, float x, float y, float z, float w
 {
 	glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w);
 }
+//to check for shader compilation/linking errors`
+void Shader::checkCompileErrors(unsigned int shader, std::string type) {
+    int success;
+    char infoLog[1024];
+    if (type != "PROGRAM") {
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+            std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+        }
+    } else {
+        glGetProgramiv(shader, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+            std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+        }
+    }
+};
