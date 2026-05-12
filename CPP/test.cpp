@@ -79,8 +79,8 @@ int main()
 
     //time to load the map
     int width, height, nrChannels;
-    unsigned char* mapDataFromPics = stbi_load("Pics/container.jpg", &width, &height, &nrChannels, 0);
-    if (!mapDataFromPics) {
+    unsigned char* mapOfTheBox = stbi_load("Pics/container.jpg", &width, &height, &nrChannels, 0);
+    if (!mapOfTheBox) {
         std::cerr << "Failed to load texture" << std::endl;
         std::exit(EXIT_FAILURE);
     }
@@ -97,9 +97,9 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, mapDataFromPics);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, mapOfTheBox);
     glGenerateMipmap(GL_TEXTURE_2D);
-    stbi_image_free(mapDataFromPics);
+    stbi_image_free(mapOfTheBox);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 
