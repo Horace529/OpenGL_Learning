@@ -6,6 +6,10 @@
 #include <cmath>
 #include "Shader.h"
 #include "stb_image.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -77,30 +81,51 @@ int main()
 	glEnableVertexAttribArray(2);
    
 
-    //time to load the map
-    int width, height, nrChannels;
-    unsigned char* mapOfTheBox = stbi_load("Pics/container.jpg", &width, &height, &nrChannels, 0);
-    if (!mapOfTheBox) {
+	unsigned int textureOfWall, textureOfFace;
+	//texture 1
+	glGenTextures(1, &textureOfWall);
+	glBindTexture(GL_TEXTURE_2D, textureOfWall);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(false); // tell stb_image.h not to flip loaded texture's on the y-axis.
+	unsigned char* brickWallData = stbi_load("Pics/container.jpg", &width, &height, &nrChannels, 0);
+    if (brickWallData) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, brickWallData);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
         std::cerr << "Failed to load texture" << std::endl;
-        std::exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
-    unsigned int texture;
-    //generate ONE texture ID and store it in the variable texture
-    glGenTextures(1, &texture);
-    //to check if the texture ID is generated successfully
-    if (texture == 0) {
-        std::cerr << "Failed to generate texture" << std::endl;
-        std::exit(EXIT_FAILURE);
-    }
-    glBindTexture(GL_TEXTURE_2D, texture);//bind the texture to the GL_TEXTURE_2D target
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	stbi_image_free(brickWallData);
+	//texture 2
+	glGenTextures(1, &textureOfFace);
+    glBindTexture(GL_TEXTURE_2D, textureOfFace);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, mapOfTheBox);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    stbi_image_free(mapOfTheBox);
-	glBindTexture(GL_TEXTURE_2D, texture);
+    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+    unsigned char* smileyFaceData = stbi_load("Pics/awesomeface.png", &width, &height, &nrChannels, 0);
+    if (smileyFaceData) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, smileyFaceData);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cerr << "Failed to load texture" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+	stbi_image_free(smileyFaceData);
+
+    ourShader.use(); // don't forget to activate/use the shader before setting uniforms!
+    ourShader.setUniform("boxTexture", 0); // set it manually
+    ourShader.setUniform("smileTexture", 1); // set it manually
+
 
 
    //uncomment this call to draw in wireframe polygons.
@@ -116,10 +141,18 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
 
+         //bind textures on corresponding texture units
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOfWall);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureOfFace);    
+        //some matrix transformations defined with glm library
+        glm::mat4 transFormation;
+        transFormation = glm::translate(transFormation, glm::vec3(0.5f, -0.5f, 0.0f));
+        transFormation = glm::rotate(transFormation, (float)glfwGetTime(), glm::normalize(glm::vec3(0.0f, 0.0f, 10.0f)));
+        ourShader.setUniform("transFormation", transFormation);
 
-        glBindTexture(GL_TEXTURE_2D, texture);
         ourShader.use();
-
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
