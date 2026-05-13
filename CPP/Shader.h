@@ -13,8 +13,10 @@ class Shader
 {
 public:
 	unsigned int ID; // the program ID
+    //only 2 types of Shader involved: vertex and fragment
 	Shader(const char* vertexPath, const char* fragmentPath);
-
+	//just in case we need to use geometry shader
+    Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath);
 	//to use/activate the shader
 	void use();
 
