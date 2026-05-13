@@ -73,14 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDir)Thirdparty\glad\include\;$(ProjectDir)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Thirdparty\glad\include\;$(ProjectDir)Thirdparty\glm\;$(ProjectDir)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Thirdparty\glad\src;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(ProjectDir)Thirdparty\stb\;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Intermedia\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDir)Thirdparty\glad\include\;$(ProjectDir)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Thirdparty\glad\include\;$(ProjectDir)Thirdparty\glm\;$(ProjectDir)Thirdparty\glfw-3.4.bin.WIN64\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)Thirdparty\glad\src;$(ProjectDIR)Thirdparty\glfw-3.4.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(ProjectDir)Thirdparty\stb\;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
@@ -145,10 +145,12 @@
   <ItemGroup>
     <ClCompile Include="CPP\Shader.cpp" />
     <ClCompile Include="CPP\test.cpp" />
+    <ClCompile Include="mapLoader.cpp" />
     <ClCompile Include="Thirdparty\glad\src\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP\Shader.h" />
+    <ClInclude Include="mapLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BrickWall_Fragment.glsl" />

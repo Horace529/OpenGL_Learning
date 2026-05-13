@@ -18,13 +18,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Thirdparty\glad\src\glad.c">
       <Filter>资源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="CPP\Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mapLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,9 +38,18 @@
     <None Include="Shaders\fragment.glsl">
       <Filter>资源文件\shaders</Filter>
     </None>
+    <None Include="Shaders\BrickWall_Fragment.glsl">
+      <Filter>资源文件\shaders</Filter>
+    </None>
+    <None Include="Shaders\BrickWall_vertex.glsl">
+      <Filter>资源文件\shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="CPP\Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mapLoader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
